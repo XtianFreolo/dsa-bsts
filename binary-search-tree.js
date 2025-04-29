@@ -46,7 +46,33 @@ class BinarySearchTree {
    * Returns the tree. Uses recursion. */
 
   insertRecursively(val) {
-
+    const newNode = new Node(val);
+  
+    function insertHelper(current) {
+      if (val < current.val) {
+        if (!current.left) {
+          current.left = newNode;
+          return;
+        } else {
+          insertHelper(current.left);
+        }
+      } else {
+        if (!current.right) {
+          current.right = newNode;
+          return;
+        } else {
+          insertHelper(current.right);
+        }
+      }
+    }
+  
+    if (!this.root) {
+      this.root = newNode;
+    } else {
+      insertHelper(this.root);
+    }
+  
+    return this;
   }
 
   /** find(val): search the tree for a node with value val.
